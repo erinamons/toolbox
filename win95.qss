@@ -1,0 +1,264 @@
+/* =========================================================
+   Win95 经典风格样式表
+   灰色 #c0c0c0 + 3D 凸起/凹陷边框 + 蓝色标题条
+   ========================================================= */
+
+* {
+    font-family: "MS Sans Serif", "Tahoma", "Microsoft YaHei", sans-serif;
+    font-size: 11px;
+    color: #000000;
+}
+
+QWidget {
+    background: #c0c0c0;
+}
+
+/* ── 蓝色标题条（模拟 Win95 标题栏） ─────────────────── */
+QLabel#winTitle {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                stop:0 #000080, stop:1 #1084d0);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 8px;
+}
+
+/* ── 菜单栏（真实 QMenuBar） ────────────────────────── */
+QMenuBar {
+    background: #c0c0c0;
+    border: 2px solid;
+    border-top-color: #ffffff;
+    border-left-color: #ffffff;
+    border-right-color: #404040;
+    border-bottom-color: #404040;
+    padding: 1px 4px;
+}
+QMenuBar::item {
+    background: transparent;
+    padding: 4px 10px;
+    color: #000000;
+}
+QMenuBar::item:selected {
+    background: #000080;
+    color: #ffffff;
+}
+QMenuBar::item:pressed {
+    background: #000080;
+    color: #ffffff;
+}
+
+/* ── 状态栏（凹陷） ─────────────────────────────────── */
+QLabel#statusBar {
+    background: #c0c0c0;
+    border: 2px solid;
+    border-top-color: #404040;
+    border-left-color: #404040;
+    border-right-color: #ffffff;
+    border-bottom-color: #ffffff;
+    padding: 2px 6px;
+}
+
+/* ── 工具标题 ───────────────────────────────────────── */
+QLabel#toolTitle {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* ── 按钮：3D 凸起，按下凹陷 ────────────────────────── */
+QPushButton {
+    background: #c0c0c0;
+    border: 2px solid;
+    border-top-color: #ffffff;
+    border-left-color: #ffffff;
+    border-right-color: #404040;
+    border-bottom-color: #404040;
+    padding: 3px 14px;
+    border-radius: 0px;
+}
+QPushButton:pressed {
+    border-top-color: #404040;
+    border-left-color: #404040;
+    border-right-color: #ffffff;
+    border-bottom-color: #ffffff;
+    padding: 4px 13px 2px 15px;
+}
+QPushButton:disabled {
+    color: #808080;
+}
+QPushButton:focus {
+    outline: 1px dotted #000000;
+}
+
+/* 工具卡片大按钮 */
+QPushButton#toolBtn {
+    text-align: left;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 14px;
+    min-height: 46px;
+}
+
+/* 主操作按钮（蓝色） */
+QPushButton#primaryBtn {
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 14px;
+}
+
+/* ── 输入框 / 列表 / 进度条：凹陷 ───────────────────── */
+QLineEdit, QListWidget, QTextEdit, QTextBrowser {
+    background: #ffffff;
+    border: 2px solid;
+    border-top-color: #404040;
+    border-left-color: #404040;
+    border-right-color: #ffffff;
+    border-bottom-color: #ffffff;
+    border-radius: 0px;
+    padding: 2px;
+}
+
+QListWidget::item:selected {
+    background: #000080;
+    color: #ffffff;
+}
+QListWidget::item:hover {
+    background: #1084d0;
+    color: #ffffff;
+}
+
+QProgressBar {
+    background: #ffffff;
+    border: 2px solid;
+    border-top-color: #404040;
+    border-left-color: #404040;
+    border-right-color: #ffffff;
+    border-bottom-color: #ffffff;
+    height: 14px;
+    text-align: center;
+    font-size: 10px;
+}
+QProgressBar::chunk {
+    background: #000080;
+}
+
+/* ── 单选按钮：经典圆点 ─────────────────────────────── */
+QRadioButton {
+    background: transparent;
+    spacing: 5px;
+}
+QRadioButton::indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    border: 2px solid #404040;
+    background: #c0c0c0;
+}
+QRadioButton::indicator:checked {
+    background: #000080;
+}
+
+/* ── 复选框 ─────────────────────────────────────────── */
+QCheckBox {
+    background: transparent;
+    spacing: 5px;
+}
+QCheckBox::indicator {
+    width: 13px;
+    height: 13px;
+    border: 2px solid;
+    border-top-color: #404040;
+    border-left-color: #404040;
+    border-right-color: #ffffff;
+    border-bottom-color: #ffffff;
+    background: #ffffff;
+}
+QCheckBox::indicator:checked {
+    background: #ffffff;
+    border: 1px solid #404040;
+}
+
+/* ── 分组框 ─────────────────────────────────────────── */
+QGroupBox {
+    border: 2px solid;
+    border-top-color: #ffffff;
+    border-left-color: #ffffff;
+    border-right-color: #404040;
+    border-bottom-color: #404040;
+    margin-top: 8px;
+    padding-top: 6px;
+    font-weight: bold;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 8px;
+    padding: 0 4px;
+    background: #c0c0c0;
+}
+
+/* ── 滚动条 ─────────────────────────────────────────── */
+QScrollBar:vertical {
+    background: #c0c0c0;
+    width: 16px;
+    border: 2px solid;
+    border-top-color: #ffffff;
+    border-left-color: #ffffff;
+    border-right-color: #404040;
+    border-bottom-color: #404040;
+    margin: 0;
+}
+QScrollBar::handle:vertical {
+    background: #c0c0c0;
+    border: 2px solid;
+    border-top-color: #ffffff;
+    border-left-color: #ffffff;
+    border-right-color: #404040;
+    border-bottom-color: #404040;
+    min-height: 20px;
+}
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 16px;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-top-color: #ffffff;
+    border-left-color: #ffffff;
+    border-right-color: #404040;
+    border-bottom-color: #404040;
+}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+    width: 0; height: 0;
+}
+
+/* ── 右键菜单：Win95 弹出菜单 ────────────────────── */
+QMenu {
+    background: #c0c0c0;
+    border: 2px solid;
+    border-top-color: #ffffff;
+    border-left-color: #ffffff;
+    border-right-color: #404040;
+    border-bottom-color: #404040;
+    padding: 2px;
+}
+QMenu::item {
+    background: transparent;
+    padding: 4px 24px 4px 22px;
+    border: 1px solid transparent;
+}
+QMenu::item:selected {
+    background: #000080;
+    color: #ffffff;
+}
+QMenu::item:disabled {
+    color: #808080;
+}
+QMenu::separator {
+    height: 2px;
+    background: #c0c0c0;
+    border-top: 2px solid #808080;
+    border-bottom: 2px solid #ffffff;
+    margin: 2px 2px;
+}
+
+/* ── 提示文字 ───────────────────────────────────────── */
+QLabel {
+    background: transparent;
+}

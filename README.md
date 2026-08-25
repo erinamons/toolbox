@@ -61,6 +61,7 @@ python release.py 1.2 "更新说明"
 
 ## 参与贡献
 
+- **源码仓库**：https://github.com/erinamons/toolbox
 - **提想法 / 报 Bug**：[下载页反馈区](https://mochizuki.top/downloads.html)提交，支持投票
 - **加功能**：Fork 后在 `tools/` 目录新建工具模块（继承 `tools/base.py` 的 `ToolBase`），提 PR 即可
 

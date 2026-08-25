@@ -17,3 +17,9 @@ Desktop.ini
 # ===== 运行时产物 =====
 *.log
 *.tmp
+
+# WorkBuddy 会话数据（不入库）
+.workbuddy/
+
+# C# 原型（不入库）
+ToolboxCS/

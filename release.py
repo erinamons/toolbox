@@ -34,6 +34,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -190,6 +191,33 @@ def validate_version(v: str) -> None:
         raise ReleaseError(f"版本号不合法：{v}（应为 1、1.2、1.2.3 形式）")
 
 
+def read_app_version() -> str:
+    """从 toolbox.py 源码读取 APP_VERSION 常量。
+
+    发布版本号必须与 exe 内置版本一致，否则用户「关于」页显示旧版本、
+    且会陷入「提示更新→装到的还是旧版本」的死循环（v1.2 坏包事故）。
+    """
+    source_path = os.path.join(BASE, "toolbox.py")
+    with open(source_path, "r", encoding="utf-8") as f:
+        source = f.read()
+    match = re.search(r'^APP_VERSION\s*=\s*["\']([^"\']+)["\']', source, re.MULTILINE)
+    if not match:
+        raise ReleaseError("toolbox.py 中未找到 APP_VERSION 常量")
+    return match.group(1).strip()
+
+
+def assert_version_consistency(version: str) -> str:
+    """断言发布版本号 == toolbox.py 的 APP_VERSION，不一致直接拒发。"""
+    app_version = read_app_version()
+    if app_version != version:
+        raise ReleaseError(
+            f"版本不一致：发布版本 {version}，但 toolbox.py 的 APP_VERSION 是 {app_version}。\n"
+            f"请先把 toolbox.py 的 APP_VERSION 改为 {version} 再发版，"
+            f"否则用户「关于」页会显示错误版本并陷入更新死循环。"
+        )
+    return app_version
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="工具箱一键发版（releases API）")
     ap.add_argument("version", help="版本号，如 1.2")
@@ -203,6 +231,9 @@ def main() -> None:
     args = ap.parse_args()
 
     validate_version(args.version)
+
+    # 版本一致性：发布号必须等于 exe 内置 APP_VERSION（防止坏包，v1.2 事故防线）
+    app_version = assert_version_consistency(args.version)
 
     # dry-run 无需令牌即可演练
     token = load_token(args.token) if not args.dry_run else (args.token or "dry-run-token")
@@ -231,7 +262,8 @@ def main() -> None:
         raise ReleaseError(f"安装包扩展名不受支持：{ext}（支持 {'/'.join(sorted(ASSET_EXTS))}）")
 
     plan = {
-        "app": APP_SLUG, "version": args.version, "notes": args.notes,
+        "app": APP_SLUG, "version": args.version, "app_version": app_version,
+        "notes": args.notes,
         "mandatory": args.mandatory, "base": base, "exe": exe,
         "sha256": sha256, "size": size,
     }

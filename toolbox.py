@@ -32,11 +32,13 @@ from PySide6.QtWidgets import (
 import updater
 from tools.pdf2jpg_tool import PDF2JPGTool
 from tools.ncm2mp3_tool import NCM2MP3Tool
+from tools.mediainfo_tool import MediaInfoTool
 
 # ── 工具注册表：新工具在此追加 ─────────────────────
 TOOLS = [
     PDF2JPGTool,
     NCM2MP3Tool,
+    MediaInfoTool,
 ]
 
 APP_VERSION = "1.1"
@@ -60,6 +62,13 @@ HELP_TEXT = """<h2>工具箱 使用帮助</h2>
   <li>自动识别内层格式：MP3 / FLAC，无需手动选择</li>
   <li>勾选「按元数据命名」时，用 <code>歌手 - 歌名</code> 作为输出文件名</li>
   <li>勾选「导出专辑封面」可同时保存封面图片</li>
+</ul>
+<h3>🎬 MediaInfo</h3>
+<p>拖入视频/音频文件，查看完整技术参数（编码、分辨率、帧率、音轨、字幕、章节等）。</p>
+<ul>
+  <li>支持批量：一次拖入多个文件或整个文件夹，列表中点击切换查看</li>
+  <li>「复制当前/全部信息」可导出 MediaInfo 风格纯文本，方便发帖求助时粘贴</li>
+  <li>依赖 <code>bin/ffprobe.exe</code>（ffmpeg 官方 build 内含），安装版已自带</li>
 </ul>
 <p><b>注意</b>：请仅用于转换自己账号下载 / 已购歌曲的个人备份，勿用于传播。</p>
 

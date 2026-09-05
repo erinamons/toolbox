@@ -31,6 +31,13 @@ cmd = [PYI, "--noconfirm", "--onefile", "--windowed",
        "--icon", "assets/toolbox.ico",
        "--add-data", "assets;assets",
        "--add-data", "win95.qss;."]
+
+# MediaInfo / 视频压缩工具依赖 bin/ffprobe.exe（ffmpeg 官方 build 内含）
+if os.path.isfile(os.path.join(BASE, "bin", "ffprobe.exe")):
+    cmd += ["--add-binary", os.path.join(BASE, "bin", "ffprobe.exe") + ";bin"]
+else:
+    print("[WARN] bin/ffprobe.exe 不存在，MediaInfo 工具在单文件包内将不可用")
+
 for m in EXCLUDES:
     cmd += ["--exclude-module", m]
 cmd.append("toolbox.py")

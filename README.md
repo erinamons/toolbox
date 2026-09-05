@@ -19,6 +19,9 @@
 |------|------|
 | PDF 转 JPG | 批量把 PDF 每页转成 JPG 图片，可选 DPI 与输出目录 |
 | NCM 转 MP3 | 解密网易云音乐 NCM 格式为通用 MP3，保留元数据、封面，可选按「歌手 - 歌名」命名 |
+| MediaInfo | 批量拖入视频/音频，查看完整技术参数（编码、分辨率、帧率、音轨、字幕、章节），可复制 MediaInfo 风格文本 |
+
+> MediaInfo 依赖 `bin/ffprobe.exe`（ffmpeg 官方 build 内含，安装包已自带）；从源码运行请把 ffprobe.exe 放到仓库根目录 `bin/` 下，或加入系统 PATH。
 
 ## 下载
 
@@ -74,3 +77,6 @@ python release.py 1.2 "更新说明"
 ## License
 
 [MIT](LICENSE)
+
+本工具的 MediaInfo 功能使用了 FFmpeg 项目（`bin/ffprobe.exe`，LGPL/GPL），
+其版权归 FFmpeg 项目及原作者所有，遵循各自许可证分发。

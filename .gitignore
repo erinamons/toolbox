@@ -23,3 +23,6 @@ Desktop.ini
 
 # C# 原型（不入库）
 ToolboxCS/
+
+# ===== ffmpeg 二进制（构建时下载，不入库） =====
+bin/

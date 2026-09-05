@@ -33,12 +33,14 @@ import updater
 from tools.pdf2jpg_tool import PDF2JPGTool
 from tools.ncm2mp3_tool import NCM2MP3Tool
 from tools.mediainfo_tool import MediaInfoTool
+from tools.compress_tool import CompressTool
 
 # ── 工具注册表：新工具在此追加 ─────────────────────
 TOOLS = [
     PDF2JPGTool,
     NCM2MP3Tool,
     MediaInfoTool,
+    CompressTool,
 ]
 
 APP_VERSION = "1.1"
@@ -69,6 +71,14 @@ HELP_TEXT = """<h2>工具箱 使用帮助</h2>
   <li>支持批量：一次拖入多个文件或整个文件夹，列表中点击切换查看</li>
   <li>「复制当前/全部信息」可导出 MediaInfo 风格纯文本，方便发帖求助时粘贴</li>
   <li>依赖 <code>bin/ffprobe.exe</code>（ffmpeg 官方 build 内含），安装版已自带</li>
+</ul>
+<h3>🗜 视频压缩</h3>
+<p>本地视频压制（小丸工具箱式）：H.264 兼容 / H.265 更小体积，CRF 质量滑条，批量队列。</p>
+<ul>
+  <li>质量滑条：CRF 18（高画质）→ 32（高压缩），默认 23 均衡</li>
+  <li>速度预设 veryfast 适合日常，slow 花时间换更小体积</li>
+  <li>输出统一 MP4（H.265 建议用支持 HEVC 的播放器），完成后显示前后体积对比</li>
+  <li>依赖 <code>bin/ffmpeg.exe</code>（安装包已自带）</li>
 </ul>
 <p><b>注意</b>：请仅用于转换自己账号下载 / 已购歌曲的个人备份，勿用于传播。</p>
 

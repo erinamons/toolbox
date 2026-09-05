@@ -48,6 +48,27 @@ def find_ffprobe():
     return os.path.abspath(found) if found else None
 
 
+def find_ffmpeg():
+    """定位 ffmpeg 可执行文件，定位顺序同 find_ffprobe。"""
+    candidates = []
+    meipass = getattr(sys, "_MEIPASS", None)
+    if meipass:
+        candidates.append(os.path.join(meipass, "bin", "ffmpeg.exe"))
+    base = os.path.dirname(os.path.abspath(sys.argv[0] if getattr(sys, "frozen", False) else __file__))
+    for root in (
+        os.path.dirname(os.path.abspath(sys.executable)) if getattr(sys, "frozen", False) else None,
+        base,
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    ):
+        if root:
+            candidates.append(os.path.join(root, "bin", "ffmpeg.exe"))
+    for path in candidates:
+        if os.path.isfile(path):
+            return path
+    found = shutil.which("ffmpeg")
+    return os.path.abspath(found) if found else None
+
+
 def probe(path, ffprobe_path=None, timeout=30):
     """解析媒体文件，返回 ffprobe JSON dict；失败抛 RuntimeError。"""
     global _LAST_PROBE_ERROR

@@ -6,7 +6,8 @@ import subprocess
 import sys
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-PYI = os.path.join(os.path.dirname(sys.executable), "pyinstaller.exe")
+# 用 python -m PyInstaller 而非 pyinstaller.exe shim（后者在本机环境会静默退出）
+PYI_CMD = [sys.executable, "-m", "PyInstaller"]
 
 EXCLUDES = [
     "PySide6.QtQml", "PySide6.QtQuick", "PySide6.QtQuick3D", "PySide6.QtQuickWidgets",
@@ -26,17 +27,19 @@ EXCLUDES = [
     "PySide6.QtHelp", "PySide6.QtXmlPatterns",
 ]
 
-cmd = [PYI, "--noconfirm", "--onefile", "--windowed",
+cmd = PYI_CMD + ["--noconfirm", "--onefile", "--windowed",
        "--name", "工具箱",
        "--icon", "assets/toolbox.ico",
        "--add-data", "assets;assets",
        "--add-data", "win95.qss;."]
 
-# MediaInfo / 视频压缩工具依赖 bin/ffprobe.exe（ffmpeg 官方 build 内含）
-if os.path.isfile(os.path.join(BASE, "bin", "ffprobe.exe")):
-    cmd += ["--add-binary", os.path.join(BASE, "bin", "ffprobe.exe") + ";bin"]
-else:
-    print("[WARN] bin/ffprobe.exe 不存在，MediaInfo 工具在单文件包内将不可用")
+# MediaInfo / 视频压缩工具依赖 bin/ffprobe.exe 与 bin/ffmpeg.exe（ffmpeg 官方 build 内含）
+for binary in ("ffprobe.exe", "ffmpeg.exe"):
+    binary_path = os.path.join(BASE, "bin", binary)
+    if os.path.isfile(binary_path):
+        cmd += ["--add-binary", binary_path + ";bin"]
+    else:
+        print(f"[WARN] bin/{binary} 不存在，相关工具在单文件包内将不可用")
 
 for m in EXCLUDES:
     cmd += ["--exclude-module", m]

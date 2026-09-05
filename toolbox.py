@@ -43,7 +43,7 @@ TOOLS = [
     CompressTool,
 ]
 
-APP_VERSION = "1.1"
+APP_VERSION = "1.2"
 
 LOGO_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "toolbox.png")
 

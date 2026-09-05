@@ -308,7 +308,8 @@ class ToolboxWindow(QWidget):
 
         total = info.size
         self._dl_dlg = QProgressDialog(
-            f"正在下载新版本 v{info.latest} …", "取消", 0,
+            f"正在下载新版本 v{info.latest} …\n（下载到系统临时目录，完成后将询问是否安装）",
+            "取消下载", 0,
             100 if total else 0, self
         )
         self._dl_dlg.setWindowTitle("更新")
@@ -397,9 +398,16 @@ class ToolboxWindow(QWidget):
         if dlg is not None:
             dlg.reset()
             dlg.close()
+        cancelled = self._cancel_download.is_set()
         self._update_state = "idle"
-        if self._cancel_download.is_set():
-            return                              # 用户主动取消，不弹错误
+        if cancelled:
+            # 用户主动取消：给明确反馈，避免「下载完没反应」的困惑
+            QMessageBox.information(
+                self, "更新已取消",
+                "下载已取消，未对当前程序做任何更改。\n"
+                "需要更新时可从「帮助 → 检查更新」重新发起。"
+            )
+            return
         QMessageBox.critical(self, "更新失败", err)
 
     def closeEvent(self, event):

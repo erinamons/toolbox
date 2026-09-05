@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""工具：视频压缩（小丸式本地压制：H.264/H.265 + CRF，批量队列，进度实时）。"""
+"""工具：视频压缩（本地压制：H.264/H.265 + CRF，批量队列，进度实时）。"""
 import glob
 import os
 import re
@@ -172,7 +172,7 @@ class CompressWorker(QThread):
 
 class CompressTool(ToolWidget):
     name = "视频压缩"
-    description = "小丸式本地压制：H.264/H.265 + 质量滑条，批量队列"
+    description = "本地视频压制：H.264/H.265 + 质量滑条，批量队列"
     icon = "🗜"
     icon_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets", "compress.png")
 

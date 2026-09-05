@@ -64,6 +64,7 @@ class MediaInfoTool(ToolWidget):
     name = "MediaInfo"
     description = "拖入视频/音频，查看完整技术参数"
     icon = "🎬"
+    icon_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets", "mediainfo.png")
 
     def __init__(self, on_back=None, parent=None):
         self._worker = None

@@ -43,7 +43,7 @@ import urllib.request
 APP_NAME = "工具箱"
 APP_ID = "Toolbox"          # HTTP User-Agent 必须 ASCII（header 仅支持 latin-1）
 MANIFEST_URL = os.environ.get(
-    "TOOLBOX_UPDATE_URL", "https://mochizuki.top/downloads/update.json"
+    "TOOLBOX_UPDATE_URL", "https://mochizuki.top/downloads/toolbox/update.json"
 )
 
 _CHUNK = 64 * 1024            # 下载分块 64 KB

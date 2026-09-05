@@ -174,6 +174,7 @@ class CompressTool(ToolWidget):
     name = "视频压缩"
     description = "小丸式本地压制：H.264/H.265 + 质量滑条，批量队列"
     icon = "🗜"
+    icon_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets", "compress.png")
 
     def __init__(self, on_back=None, parent=None):
         self._worker = None
